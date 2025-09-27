@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Strona kota<title>
+  <title>Logowanie</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Strona kota</h1>
+    <h1>Panel Logowania</h1>
     <form id="loginForm">
       <input type="password" id="password" placeholder="Wpisz hasło" required />
       <button type="submit">Zaloguj</button>
@@ -42,8 +42,8 @@
       const password = document.getElementById("password").value;
       const error = document.getElementById("error");
 
-      if (password === "166169") {
-        window.location.href = "download.html";
+      if (password === "kundel") {
+        window.location.href = "downloads.html";
       } else {
         error.textContent = "Nieprawidłowe hasło!";
       }
@@ -51,8 +51,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
