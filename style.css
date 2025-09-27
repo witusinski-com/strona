@@ -145,29 +145,6 @@ form button:hover {
 .social-item a:hover {
   color: #ffffff;
 }
-.image-row 
-{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
- justify-content: center;
- margin: 20px 0;
-}
-    .image-row img 
-    {
-      max-width: 150px;
-      max-height: 150px;
-      border-radius: 10px;
-      object-fit: cover;
-      box-shadow: 0 0 10px rgba(212, 0, 255, 0.5);
-      transition: transform 0.3s;
-    }
-
-    .image-row img:hover 
-    {
-      transform: scale(1.05);
-    }
-
     .container 
     {
       background: #1a1a1a;
@@ -196,3 +173,4 @@ form button:hover {
     {
       color: #ffffff;
     }
+
