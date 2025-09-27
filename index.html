@@ -1,57 +1,138 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>pablotg</title>
-  <link rel="icon" type="image/x-icon" href="nela.ico">
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Moja Strona</title>
+  <link rel="icon"type="image/x-icon" href="pablo.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Panel Logowania</h1>
-    <form id="loginForm">
-      <input type="password" id="password" placeholder="Wpisz hasło" required />
-      <button type="submit">Zaloguj</button>
-      <p id="error" class="error"></p>
-    </form>
 
-    <div class="socials">
-  <div class="social-item">
-    <img src="ig.png" alt="Instagram" />
-    <a href="https://www.instagram.com/71pablotg/" target="_blank">Instagram</a>
-  </div>
-  <div class="social-item">
-    <img src="tiktok.png" alt="TikTok" />
-    <a href="https://www.tiktok.com/@pablo2account" target="_blank">TikTok</a>
-  </div>
-  <div class="social-item">
-    <img src="threads.png" alt="Threads" />
-    <a href="https://www.threads.com/@71pablotg" target="_blank">Threads</a>
-  </div>
-  <div class="social-item">
-    <img src="cr.png" alt="Clash Royale" />
-    <a href="https://link.clashroyale.com/invite/friend/en?tag=9LL0CGVP8&token=p3eyfdez&platform=iOS" target="_blank">Clash Royale</a>
-  </div>
-</div>
+  <!-- 1. Notatki -->
+  <section id="notes">
+    
+    <textarea id="notepad" placeholder="Zapisz swoje notatki..."></textarea>
+  </section>
 
-  </div>
+ 
+
+  <!-- 4. Logowanie -->
+  <section id="login">
+    <h2>Logowanie</h2>
+    <input type="text" id="username" placeholder="Login">
+    <input type="password" id="password" placeholder="Hasło">
+    <button onclick="login()">Zaloguj</button>
+    <p id="error"></p>
+  </section>
+
+  <!-- 2. Galeria -->
+  <section id="gallery">
+    
+    <img src="1.jpg" alt="foto1">
+    <img src="2.jpg" alt="foto2">
+    <img src="3.jpg" alt="foto3">
+    <img src="4.jpg" alt="foto4">
+    <img src="5.jpg" alt="foto1">
+    <img src="6.jpg" alt="foto2">
+    <img src="7.jpg" alt="foto3">
+    <img src="8.jpg" alt="foto4">
+    <img src="9.jpg" alt="foto1">
+    <img src="10.jpg" alt="foto2">
+    <img src="11.jpg" alt="foto3">
+    <img src="12.jpg" alt="foto4">
+    <img src="1.jpg" alt="foto1">
+    <img src="2.jpg" alt="foto2">
+    <img src="3.jpg" alt="foto3">
+    <img src="4.jpg" alt="foto4">
+    <img src="5.jpg" alt="foto1">
+    <img src="6.jpg" alt="foto2">
+    <img src="7.jpg" alt="foto3">
+    <img src="8.jpg" alt="foto4">
+    <img src="9.jpg" alt="foto1">
+    <img src="10.jpg" alt="foto2">
+    <img src="11.jpg" alt="foto3">
+    <img src="12.jpg" alt="foto4">
+    <img src="1.jpg" alt="foto1">
+    <img src="2.jpg" alt="foto2">
+    <img src="3.jpg" alt="foto3">
+    <img src="4.jpg" alt="foto4">
+    <img src="5.jpg" alt="foto1">
+    <img src="6.jpg" alt="foto2">
+    <img src="7.jpg" alt="foto3">
+    <img src="8.jpg" alt="foto4">
+    <img src="9.jpg" alt="foto1">
+    <img src="10.jpg" alt="foto2">
+    <img src="11.jpg" alt="foto3">
+    <img src="12.jpg" alt="foto4">
+    <img src="1.jpg" alt="foto1">
+    <img src="2.jpg" alt="foto2">
+    <img src="3.jpg" alt="foto3">
+    <img src="4.jpg" alt="foto4">
+    <img src="5.jpg" alt="foto1">
+    <img src="6.jpg" alt="foto2">
+    <img src="7.jpg" alt="foto3">
+    <img src="8.jpg" alt="foto4">
+    <img src="9.jpg" alt="foto1">
+    <img src="10.jpg" alt="foto2">
+    <img src="11.jpg" alt="foto3">
+    <img src="12.jpg" alt="foto4">
+    <img src="1.jpg" alt="foto1">
+    <img src="2.jpg" alt="foto2">
+    <img src="3.jpg" alt="foto3">
+    <img src="4.jpg" alt="foto4">
+    <img src="5.jpg" alt="foto1">
+    <img src="6.jpg" alt="foto2">
+    <img src="7.jpg" alt="foto3">
+    <img src="8.jpg" alt="foto4">
+    <img src="9.jpg" alt="foto1">
+    <img src="10.jpg" alt="foto2">
+    <img src="11.jpg" alt="foto3">
+    <img src="12.jpg" alt="foto4">
+    <img src="1.jpg" alt="foto1">
+    <img src="2.jpg" alt="foto2">
+    <img src="3.jpg" alt="foto3">
+    <img src="4.jpg" alt="foto4">
+    <img src="5.jpg" alt="foto1">
+    <img src="6.jpg" alt="foto2">
+    <img src="7.jpg" alt="foto3">
+    <img src="8.jpg" alt="foto4">
+    <img src="9.jpg" alt="foto1">
+    <img src="10.jpg" alt="foto2">
+    <img src="11.jpg" alt="foto3">
+    <img src="12.jpg" alt="foto4">
+    <img src="1.jpg" alt="foto1">
+    <img src="2.jpg" alt="foto2">
+    <img src="3.jpg" alt="foto3">
+    <img src="4.jpg" alt="foto4">
+    <img src="5.jpg" alt="foto1">
+    <img src="6.jpg" alt="foto2">
+    <img src="7.jpg" alt="foto3">
+    <img src="8.jpg" alt="foto4">
+    <img src="9.jpg" alt="foto1">
+    <img src="10.jpg" alt="foto2">
+    <img src="11.jpg" alt="foto3">
+    <img src="12.jpg" alt="foto4">
+  </section>
 
   <script>
-    document.getElementById("loginForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const password = document.getElementById("password").value;
-      const error = document.getElementById("error");
-
-      if (password === "kundel") {
-        window.location.href = "downloads.html";
-      } else {
-        error.textContent = "Nieprawidłowe hasło!";
-      }
+    // Notatki localStorage
+    const notepad = document.getElementById("notepad");
+    notepad.value = localStorage.getItem("notes") || "";
+    notepad.addEventListener("input", () => {
+      localStorage.setItem("notes", notepad.value);
     });
+
+    // Logowanie
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      if (user === "pablo" && pass === "kundel") {
+        window.location.href = "download.html";
+      } else {
+        document.getElementById("error").innerText = "❌ Błędny login lub hasło!";
+      }
+    }
   </script>
 </body>
 </html>
-
-
-
