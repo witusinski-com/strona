@@ -1,123 +1,53 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Strefa plików</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Logowanie</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="container">
+    <h1>Panel Logowania</h1>
+    <form id="loginForm">
+      <input type="password" id="password" placeholder="Wpisz hasło" required />
+      <button type="submit">Zaloguj</button>
+      <p id="error" class="error"></p>
+    </form>
 
-  <!-- Overlay z prośbą o hasło -->
-  <div id="overlay" class="overlay">
-    <div class="card">
-      <h2>🔒 Wprowadź hasło</h2>
-      <p class="hint">Aby uzyskać dostęp, wpisz hasło.</p>
-      <form id="pwForm" onsubmit="return handleSubmit(event)">
-        <input id="pwInput" type="password" placeholder="Hasło" aria-label="Hasło" required autofocus>
-        <div class="controls">
-          <button type="submit" class="btn primary">Zatwierdź</button>
-          <button type="button" class="btn ghost" onclick="clearInput()">Wyczyść</button>
-        </div>
-        <p id="err" class="error" aria-live="polite" hidden>Nieprawidłowe hasło.</p>
-      </form>
-    </div>
+    <div class="socials">
+  <div class="social-item">
+    <img src="ikonki/ig.png" alt="Instagram" />
+    <a href="https://www.instagram.com/71pablotg/" target="_blank">Instagram</a>
+  </div>
+  <div class="social-item">
+    <img src="ikonki/tiktok.png" alt="TikTok" />
+    <a href="https://www.tiktok.com/@pablo2account" target="_blank">TikTok</a>
+  </div>
+  <div class="social-item">
+    <img src="ikonki/threads.png" alt="Threads" />
+    <a href="https://www.threads.com/@71pablotg" target="_blank">Threads</a>
+  </div>
+  <div class="social-item">
+    <img src="ikonki/cr.png" alt="Clash Royale" />
+    <a href="https://link.clashroyale.com/invite/friend/en?tag=9LL0CGVP8&token=p3eyfdez&platform=iOS" target="_blank">Clash Royale</a>
+  </div>
+</div>
+
   </div>
 
-  <!-- Treść strony (ukryta dopóki nie wpisano hasła) -->
-  <main id="mainContent" class="hidden">
-    <header class="topbar">
-      <h1>📂 Dostępne pliki</h1>
-      <button class="btn small" onclick="lockAgain()">🔒 Wyloguj</button>
-    </header>
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const password = document.getElementById("password").value;
+      const error = document.getElementById("error");
 
-    <section class="files">
-      <a class="file-card" href="Informatyka.zip" download>
-        <div class="icon">📄</div>
-        <div class="meta">
-          <div class="title">informatyka</div>
-          <div class="desc">informatyka</div>
-        </div>
-      </a>
-
-      <a class="file-card" href="miklusk.zip" download>
-        <div class="icon">🗜️</div>
-        <div class="meta">
-          <div class="title">Montaż i konfiguracja lokalnych sieci komputerowych</div>
-          <div class="desc">Montaż i konfiguracja lokalnych sieci komputerowych</div>
-        </div>
-      </a>
-
-      <a class="file-card" href="pai.zip" download>
-        <div class="icon">📝</div>
-        <div class="meta">
-          <div class="title">Programowanie aplikacji internetowych</div>
-          <div class="desc">Programowanie aplikacji internetowych</div>
-        </div>
-      </a>
-    </section>
-
-    <footer class="foot">
-      <small>Autorem strony jest: Paweł Witusiński</small>
-    </footer>
-  </main>
-
-<script>
-  // Hasło (frontendowe)
-  const CORRECT = "buncyl";
-
-  // Pobranie elementów
-  const overlay = document.getElementById('overlay');
-  const mainContent = document.getElementById('mainContent');
-  const err = document.getElementById('err');
-  const pwInput = document.getElementById('pwInput');
-
-  // Funkcja obsługująca submit
-  function handleSubmit(e) {
-    e.preventDefault();
-    const val = pwInput.value.trim();
-
-    if (val === CORRECT) {
-      // pokazujemy zawartość i chowamy overlay
-      overlay.classList.add('hide');
-      setTimeout(() => {
-        overlay.style.display = 'none';
-        mainContent.classList.remove('hidden');
-      }, 300);
-      err.hidden = true;
-      pwInput.value = '';
-    } else {
-      // błąd — animacja i komunikat
-      err.hidden = false;
-      pwInput.classList.add('shake');
-      setTimeout(() => pwInput.classList.remove('shake'), 500);
-    }
-    return false;
-  }
-
-  // Wyczyść input
-  function clearInput() {
-    pwInput.value = '';
-    err.hidden = true;
-    pwInput.focus();
-  }
-
-  // "Wyloguj" — ponownie pokazujemy overlay
-  function lockAgain() {
-    mainContent.classList.add('hidden');
-    overlay.style.display = 'flex';
-    setTimeout(() => overlay.classList.remove('hide'), 20);
-    err.hidden = true;
-    pwInput.focus();
-  }
-
-  // Autofocus na input przy załadowaniu
-  window.addEventListener('load', () => {
-    pwInput.focus();
-  });
-</script>
-
+      if (password === "nela") {
+        window.location.href = "gyat.html";
+      } else {
+        error.textContent = "Nieprawidłowe hasło!";
+      }
+    });
+  </script>
 </body>
 </html>
-
-
