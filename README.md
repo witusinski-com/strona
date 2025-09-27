@@ -1,2 +1,1 @@
-# strona
-repostytorium strony internetowej
+
