@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Hydrografia – tryb nauki z mapą</title>
+<style>
+body { font-family: Arial, sans-serif; display: flex; flex-direction: column; margin: 0; }
+header { background: #0066cc; color: white; padding: 15px; text-align: center; }
+main { display: flex; height: calc(100vh - 60px); }
+#lista { width: 30%; overflow-y: scroll; padding: 15px; border-right: 2px solid #ccc; }
+#mapa { flex: 1; }
+iframe { width: 100%; height: 100%; border: 0; }
+button { margin-top: 10px; padding: 10px; font-size: 16px; cursor: pointer; }
+h2 { margin-top: 20px; border-bottom: 1px solid #aaa; }
+a { display: block; margin: 3px 0; color: #0066cc; cursor: pointer; text-decoration: none; }
+a:hover { text-decoration: underline; }
+#quiz { margin-bottom: 20px; padding: 10px; background: #f0f0f0; border-radius: 5px; }
+#wynik { margin-top: 10px; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<header>
+<h1>Hydrografia – Tryb nauki 🌍</h1>
+</header>
+
+<main>
+<div id="lista">
+  <div id="quiz">
+    <p>Wylosuj miejsce i zgadnij, gdzie się znajduje:</p>
+    <button onclick="losujMiejsce()">Losuj miejsce</button>
+    <p id="wylosowane"></p>
+    <div id="wynik"></div>
+    <button onclick="pokazOdpowiedz()">Pokaż odpowiedź na mapie</button>
+  </div>
+
+  <div id="miejscaLista"></div>
+</div>
+
+<div id="mapa">
+  <iframe id="mapaFrame" src="https://www.google.com/maps?q=World&output=embed" loading="lazy"></iframe>
+</div>
+
+<script>
+// Lista wszystkich miejsc
+const miejsca = [
+  {nazwa:"Bosfor", typ:"Cieśnina"},
+  {nazwa:"Dardanele", typ:"Cieśnina"},
+  {nazwa:"Davisa", typ:"Cieśnina"},
+  {nazwa:"Drake’a", typ:"Cieśnina"},
+  {nazwa:"Skagerrak", typ:"Cieśnina"},
+  {nazwa:"Kattegat", typ:"Cieśnina"},
+  {nazwa:"Sund", typ:"Cieśnina"},
+  {nazwa:"Wielki Bełt", typ:"Cieśnina"},
+  {nazwa:"Mały Bełt", typ:"Cieśnina"},
+  {nazwa:"Florydzka", typ:"Cieśnina"},
+  {nazwa:"Gibraltarska", typ:"Cieśnina"},
+  {nazwa:"Hudsona", typ:"Cieśnina"},
+  {nazwa:"Jukatańska", typ:"Cieśnina"},
+  {nazwa:"Kaletańska", typ:"Cieśnina"},
+  {nazwa:"Koreańska", typ:"Cieśnina"},
+  {nazwa:"Sundajska", typ:"Cieśnina"},
+  {nazwa:"Tatarska", typ:"Cieśnina"},
+  {nazwa:"Tajwańska", typ:"Cieśnina"},
+  {nazwa:"Torresa", typ:"Cieśnina"},
+  {nazwa:"Bab al-Mandab", typ:"Cieśnina"},
+  {nazwa:"Bassa", typ:"Cieśnina"},
+  {nazwa:"Beringa", typ:"Cieśnina"},
+
+  {nazwa:"Biskajska", typ:"Zatoka"},
+  {nazwa:"Gwinejska", typ:"Zatoka"},
+  {nazwa:"Meksykańska", typ:"Zatoka"},
+  {nazwa:"Fundy", typ:"Zatoka"},
+  {nazwa:"Świętego Wawrzyńca", typ:"Zatoka"},
+  {nazwa:"Fińska", typ:"Zatoka"},
+  {nazwa:"Botnicka", typ:"Zatoka"},
+  {nazwa:"Alaska", typ:"Zatoka"},
+  {nazwa:"Kalifornijska", typ:"Zatoka"},
+  {nazwa:"Panamska", typ:"Zatoka"},
+  {nazwa:"Karpentaria", typ:"Zatoka"},
+  {nazwa:"Akaba", typ:"Zatoka"},
+  {nazwa:"Adeńska", typ:"Zatoka"},
+  {nazwa:"Perska", typ:"Zatoka"},
+  {nazwa:"Bengalska", typ:"Zatoka"},
+  {nazwa:"Wielka Australijska", typ:"Zatoka"},
+
+  {nazwa:"Bałtyckie", typ:"Morze"},
+  {nazwa:"Czarne", typ:"Morze"},
+  {nazwa:"Śródziemne", typ:"Morze"},
+  {nazwa:"Czerwone", typ:"Morze"},
+  {nazwa:"Arabskie", typ:"Morze"},
+  {nazwa:"Beringa", typ:"Morze"},
+  {nazwa:"Barentsa", typ:"Morze"},
+  {nazwa:"Beauforta", typ:"Morze"},
+  {nazwa:"Białe", typ:"Morze"},
+  {nazwa:"Ochockie", typ:"Morze"},
+  {nazwa:"Weddella", typ:"Morze"},
+  {nazwa:"Rossa", typ:"Morze"},
+
+  {nazwa:"Morze Kaspijskie", typ:"Jezioro"},
+  {nazwa:"Bajkał", typ:"Jezioro"},
+  {nazwa:"Wiktorii", typ:"Jezioro"},
+  {nazwa:"Tanganika", typ:"Jezioro"},
+  {nazwa:"Górne", typ:"Jezioro"},
+  {nazwa:"Michigan", typ:"Jezioro"},
+  {nazwa:"Huron", typ:"Jezioro"},
+  {nazwa:"Erie", typ:"Jezioro"},
+  {nazwa:"Ontario", typ:"Jezioro"},
+  {nazwa:"Aralskie", typ:"Jezioro"},
+  {nazwa:"Ładoga", typ:"Jezioro"},
+  {nazwa:"Bałchasz", typ:"Jezioro"},
+  {nazwa:"Wielkie Niedźwiedzie", typ:"Jezioro"},
+  {nazwa:"Wielkie Niewolnicze", typ:"Jezioro"},
+  {nazwa:"Niasa", typ:"Jezioro"},
+  {nazwa:"Winnipeg", typ:"Jezioro"},
+
+  {nazwa:"Nil", typ:"Rzeka"},
+  {nazwa:"Amazonka", typ:"Rzeka"},
+  {nazwa:"Jangcy", typ:"Rzeka"},
+  {nazwa:"Missisipi–Missouri", typ:"Rzeka"},
+  {nazwa:"Huang He", typ:"Rzeka"},
+  {nazwa:"Ob–Irtysz", typ:"Rzeka"},
+  {nazwa:"Kongo", typ:"Rzeka"},
+  {nazwa:"Mekong", typ:"Rzeka"},
+  {nazwa:"Amur", typ:"Rzeka"},
+  {nazwa:"Lena", typ:"Rzeka"},
+  {nazwa:"Parana", typ:"Rzeka"},
+  {nazwa:"Mackenzie", typ:"Rzeka"},
+  {nazwa:"Niger", typ:"Rzeka"},
+  {nazwa:"Jenisej", typ:"Rzeka"},
+  {nazwa:"Wołga", typ:"Rzeka"},
+  {nazwa:"Murray–Darling", typ:"Rzeka"},
+  {nazwa:"Jukon", typ:"Rzeka"},
+  {nazwa:"Indus", typ:"Rzeka"},
+  {nazwa:"Rio Grande", typ:"Rzeka"},
+  {nazwa:"Syr-daria", typ:"Rzeka"},
+  {nazwa:"Brahmaputra", typ:"Rzeka"},
+  {nazwa:"São Francisco", typ:"Rzeka"},
+  {nazwa:"Dunaj", typ:"Rzeka"},
+  {nazwa:"Eufrat", typ:"Rzeka"},
+  {nazwa:"Zambezi", typ:"Rzeka"},
+  {nazwa:"Amu-daria", typ:"Rzeka"},
+  {nazwa:"Kołyma", typ:"Rzeka"},
+  {nazwa:"Ganges", typ:"Rzeka"},
+  {nazwa:"Ural", typ:"Rzeka"},
+  {nazwa:"Dniepr", typ:"Rzeka"},
+  {nazwa:"Orinoko", typ:"Rzeka"},
+  {nazwa:"Kolumbia", typ:"Rzeka"},
+  {nazwa:"Don", typ:"Rzeka"},
+  {nazwa:"Tygrys", typ:"Rzeka"},
+  {nazwa:"Peczoraa", typ:"Rzeka"}
+];
+
+// Generowanie listy pogrupowanej po typach
+const listaDiv = document.getElementById('miejscaLista');
+const kategorie = ["Cieśnina", "Zatoka", "Morze", "Jezioro", "Rzeka"];
+
+kategorie.forEach(kat => {
+  const h2 = document.createElement('h2');
+  h2.textContent = kat + "s";
+  listaDiv.appendChild(h2);
+  
+  const podlista = miejsca.filter(m => m.typ === kat);
+  podlista.forEach(m => {
+    const a = document.createElement('a');
+    a.textContent = m.nazwa;
+    a.onclick = () => pokazMiejsce(m.nazwa);
+    listaDiv.appendChild(a);
+  });
+});
+
+// Funkcja do pokazywania miejsca na mapie z typem
+function pokazMiejsce(miejsceNazwa) {
+  const miejsceObj = miejsca.find(m => m.nazwa === miejsceNazwa);
+  if(miejsceObj) {
+    const wyszukiwarka = `${miejsceObj.nazwa} ${miejsceObj.typ}`;
+    document.getElementById("mapaFrame").src = "https://www.google.com/maps?q=" + encodeURIComponent(wyszukiwarka) + "&output=embed";
+  }
+}
+
+// Tryb nauki
+let wylosowane = null;
+function losujMiejsce() {
+  const indeks = Math.floor(Math.random() * miejsca.length);
+  wylosowane = miejsca[indeks];
+  document.getElementById("wylosowane").textContent = "Zgadnij miejsce: " + wylosowane.typ;
+  document.getElementById("wynik").textContent = "";
+}
+
+function pokazOdpowiedz() {
+  if(wylosowane) {
+    document.getElementById("wynik").textContent = "To miejsce to: " + wylosowane.nazwa;
+    pokazMiejsce(wylosowane.nazwa);
+  }
+}
+</script>
+
+</body>
+</html>
